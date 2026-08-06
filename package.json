@@ -1,0 +1,28 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "encurtador",
+    "backend"
+  ],
+  "homepage": "https://github.com/Dennis12278/3DS-DS_II-AULA02-APP#readme",
+  "bugs": {
+    "url": "https://github.com/Dennis12278/3DS-DS_II-AULA02-APP/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dennis12278/3DS-DS_II-AULA02-APP.git"
+  },
+  "license": "ISC",
+  "author": "Dennis Silva Generoso",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

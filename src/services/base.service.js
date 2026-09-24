@@ -4,6 +4,8 @@ function baseService(alphabet) {
             return alphabet[0]
         }
 
+        let code = "";
+
         let result = "";
 
         while (code > 0) {

@@ -8,7 +8,7 @@ function codesService(counterRepository, baseService, blockSize = 1000) {
             limit = next + blockSize;
         }
 
-        return baseService.ToBase62(next++);
+        return baseService.toBase62(next++);
     }
 
     return { nextCode };

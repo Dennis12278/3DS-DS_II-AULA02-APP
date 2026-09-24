@@ -1,11 +1,14 @@
 function createRepositories(config) {
     if (config.driver === "memory") {
+
+        const counterRepository = require("./memory/counter.repository");
         const linksRepository = require("./memory/links.repository");
-        const counterRepository = require("./memory/counter.repository")
+   
 
         return {
-            linksRepository,
-            counterRepository,
+            counterRepository: counterRepository(),
+            linksRepository: linksRepository(),
+            
         };
     }
 }

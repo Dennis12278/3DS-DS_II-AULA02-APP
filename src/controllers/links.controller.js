@@ -14,6 +14,7 @@ function linksController(linksService, baseUrl, cacheSeconds) {
     return {
         async shorten(request, response, next) {
             try {     
+                console.log(request.body)
                 const fullUrl = request.body.url;
                 const shortenUrl = await linksService.shorten(fullUrl);
                 const responseBody = formatResponse(shortenUrl);

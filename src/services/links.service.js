@@ -22,7 +22,7 @@ function linksService(
         }
         const trimmed = value.trim();
 
-        if (trimmed.lenght > maxUrlLenght) {
+        if (trimmed.length > maxUrlLength) {
             throw fail(400, "URL_TOO_LONG", `A URL enviada passa de ${maxUrlLength} caracteres.`)
 
         }
@@ -52,7 +52,7 @@ function linksService(
         const code = await codesService.nextCode();
         await linksRepository.save(code, { originalUrl, createdAt, expiresAt });
 
-        return(code, originalUrl, createdAt, expiresAt )
+        return {code, originalUrl, createdAt, expiresAt}
     }
 
     async function resolve(code) {

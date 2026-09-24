@@ -9,7 +9,12 @@ function fail(status, code, message) {
 
 //const { status } = require("express/lib/response");
 
-function linksService(retentionYears, maxUrlLength) {
+function linksService(
+    linksRepository, 
+    codesService, 
+    retentionYears, 
+    maxUrlLength) {
+        
     function validateUrl(value) {
         if (typeof value !== "string" || value.trim() === "") {
             throw fail(400, "MISSING_URL", "O campo 'url' é obrigatório.")
@@ -44,12 +49,26 @@ function linksService(retentionYears, maxUrlLength) {
         const expiresAt = new Date(createdAt);
         expiresAt.setUTCFullYear(expiresAt.getUTCFullYear() + retentionYears);
 
-        const code = await codeService.nextCode();
+        const code = await codesService.nextCode();
         await linksRepository.save(code, { originalUrl, createdAt, expiresAt });
 
         return(code, originalUrl, createdAt, expiresAt )
     }
 
-    return { shorten };
+    async function resolve(code) {
+        const link = await linksRepository.find(code);
+
+        if (!link) {
+            throw fail(404, "LINK_NOT_FOUND", "O link não foi encontrado.");
+        }
+
+        if (link.expiresAt < new Date()) {
+            throw fail(410, "LINK_EXPIRED", "O link expirou.");
+        }
+
+        return link;
+    }
+
+    return { shorten, resolve};
 }
 module.exports = linksService

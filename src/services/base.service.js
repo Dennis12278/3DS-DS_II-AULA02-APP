@@ -4,15 +4,19 @@ function baseService(alphabet) {
             return alphabet[0]
         }
 
-        let result = '';
+        let result = "";
 
         while (code > 0) {
             result = alphabet [code / 62] + result;
             number = Math.floor(number / 62);
-
         }
+
         return code;
-        
     }
 
+    return{ 
+        toBase62
+    };
 }
+
+module.exports = baseService;

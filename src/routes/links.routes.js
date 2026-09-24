@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-function createrLinksRoutes (linksController) {
+function createLinksRoutes (linksController) {
     const router = Router();
 
     router.post("/api/links", linksController.shorten);
@@ -9,4 +9,4 @@ function createrLinksRoutes (linksController) {
     return router;
 }
 
-module.exports = createrLinksRoutes;
+module.exports = createLinksRoutes;

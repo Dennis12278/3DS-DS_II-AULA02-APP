@@ -1,6 +1,6 @@
 const { redirect } = require("express/lib/response");
 
-function linksController() {
+function linksController(linksService, baseUrl, cacheSeconds) {
     function formatResponse(link) {
         return {
             code: link.code,
@@ -10,6 +10,7 @@ function linksController() {
             expiresAt: link.expiresAt.toISOString(),
         };
     }
+
     return {
         async shorten(request, response, next) {
             try {     
@@ -28,7 +29,7 @@ function linksController() {
                 const code = request.params.code;
                 const link = await linksService.resolve(code);
                 
-                response.set("Cache-Control", "public, max-age=300")
+                response.set("Cache-Control", "public, max-age=" + cacheSeconds);
                 response.redirect(302, link.originalUrl);
             } catch (error) {
                 next (error);
@@ -36,5 +37,7 @@ function linksController() {
         }
     };
 }
+
+module.exports = linksController;
 
 //htttp://encurtador.com.br/gqkH
